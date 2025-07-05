@@ -1,0 +1,18 @@
+[project]
+name = "wordly"
+version = "0.1.0"
+description = "A Django-based article publishing platform"
+authors = [
+    {name = "krishnakamith",email = "krishnakamith@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django (>=5.2.4,<6.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
