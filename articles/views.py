@@ -1,25 +1,14 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from .models import Article
-from .forms import CreateArticleForms
+from django.views.generic import CreateView
 
 def home(request):
     articles = Article.objects.all()
     return render(request, "articles/home.html", {"articles" : articles})
 
-def create_article(request):
-    if request.method == "POST":
-        form = CreateArticleForms(request.POST)
-        if form.is_valid:
-            form_data = form.cleaned_data
-            new_article = Article(
-                title = form_data["title"],
-                content = form_data["content"],
-                status = form_data["status"],
-                word_count = form_data["word_count"],
-                twitter_post = form_data["twitter_post"],
-            )
-            new_article.save()
-            return redirect("home")
-    else:
-        form = CreateArticleForms()
-        return render(request, "articles/create_article.html", {"form" : form})
+class CreateArticleView(CreateView):
+    template_name = "articles/create_article.html"
+    model = Article
+    fields = ("title", "content", "status", "word_count", "twitter_post")
+    success_url = reverse_lazy("home")
