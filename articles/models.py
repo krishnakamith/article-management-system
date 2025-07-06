@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 ARTICLE_STATUS = (
             ("draft", "draft"),
-            ("inprogress", "inprogress"),
+            ("inprogress", "in progress"),
             ("published", "published"),
         )
 
