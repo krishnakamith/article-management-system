@@ -1,5 +1,9 @@
 {% extends "articles/base.html" %}
 
+{% block title %}
+    <title>Delete Article</title>
+{% endblock title %}
+
 {% block content %}
     <h1>Delete Article</h1>
     <p>Are you sure you want to delete "{{ article.title }}"?</p>
@@ -7,4 +11,6 @@
         {% csrf_token %}
         <button type="submit">Delete</button>
     </form>
+
+    <a href="{% url 'home' %}">No, take me back</a>
 {% endblock content %}

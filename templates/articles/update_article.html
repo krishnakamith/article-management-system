@@ -1,10 +1,18 @@
 {% extends "articles/base.html" %}
 
+{% block title %}
+    <title>Edit Article</title>
+{% endblock title %}
+
 {% block content %}
     <h1>Edit Article</h1>
+    <P>Last edited on {{ article.updated_at | date:"jS F Y" }}</P>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+
+    <a href="{% url 'home' %}">Back to homepage</a>
+    <a href="{% url 'delete_article' pk=article.id %}">Delete this article?</a>
 {% endblock content %}
