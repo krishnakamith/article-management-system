@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Article</h1>
-    <a href="{% url 'create_article' article.id %}">Create a article</a>
+    <a href="{% url 'create_article' %}">Create a article</a>
     <ul>
         {% for article in articles %}
             <li>
