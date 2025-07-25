@@ -2,6 +2,8 @@ import re
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from .managers import UserProfileManager
 
 ARTICLE_STATUS = (
             ("draft", "draft"),
@@ -10,10 +12,13 @@ ARTICLE_STATUS = (
         )
 
 class UserProfile(AbstractUser):
-    pass
+    email = models.EmailField("email address", max_length=255, unique=True)
+    objects = UserProfileManager()
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
 class Article(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField("Heading", max_length=100)
     content = models.TextField(blank=True, default="")
     word_count = models.IntegerField()
     twitter_post = models.TextField(blank=True, default="")
@@ -24,6 +29,7 @@ class Article(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="articles")
 
     def save(self, *args, **kwargs):
         text = re.sub(r"<[^>]*>", "", self.content).replace("&nbsp;", " ")
