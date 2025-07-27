@@ -1,4 +1,4 @@
-{% extends "articles/base.html" %}
+{% extends "articles/layouts/base_form.html" %}
 
 {% block title %}
     <title>Edit Article</title>
@@ -17,3 +17,4 @@
     <a href="{% url 'home' %}">Back to homepage</a>
     <a href="{% url 'delete_article' pk=article.id %}">Delete this article?</a>
 {% endblock content %}
+

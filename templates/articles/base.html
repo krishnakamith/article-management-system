@@ -6,6 +6,8 @@
     {% block title %}
         <title>Wordly</title>
     {% endblock title %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
 </head>
 <body>
     <nav>
@@ -26,5 +28,7 @@
     {% block content %}
     {% endblock content %}
     <footer>common footer</footer>
+    {% block page_js %}
+    {% endblock page_js %}
 </body>
 </html>
