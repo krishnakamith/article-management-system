@@ -14,9 +14,14 @@ class ArticleListView(LoginRequiredMixin, ListView):
     template_name = "articles/home.html"
     model = Article
     context_object_name = "articles"
+    paginate_by = 5
 
     def get_queryset(self):
-        return Article.objects.filter(creator=self.request.user).order_by("-created_at")
+        search = self.request.GET.get("search")
+        queryset = super().get_queryset().filter(creator=self.request.user)
+        if search:
+            queryset = queryset.filter(title__search = search)
+        return queryset.order_by("-created_at")
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     template_name = "articles/article_create.html"
